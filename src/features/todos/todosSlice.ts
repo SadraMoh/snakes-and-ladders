@@ -13,14 +13,15 @@ export const todosSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
-    add: (list, action: PayloadAction<Todo>) => {
-      // list.push(action.payload);
-      list = [...list, action.payload];
+    addTodo: (list, action: PayloadAction<Todo>) => {
+      list.push(action.payload);
+      // list = [...list, action.payload];
     },
-    remove: (list, action: PayloadAction<Todo>) => {
-      list = list.filter(i => i.id !== action.payload.id);
+    removeTodo: (list, action: PayloadAction<Todo>) => {
+      const toBeDeletedIndex = list.findIndex(i => i.id === action.payload.id);
+      list.splice(toBeDeletedIndex, 1);
     },
-    toggle: (list, action: PayloadAction<Todo>) => {
+    toggleTodo: (list, action: PayloadAction<Todo>) => {
       const itemIndex = list.findIndex(i => i.id === action.payload.id);
 
       if (itemIndex < 0) { console.warn('item not found'); return };
@@ -30,8 +31,8 @@ export const todosSlice = createSlice({
   }
 })
 
-export const { add, remove, toggle } = todosSlice.actions;
+export const { addTodo, removeTodo, toggleTodo } = todosSlice.actions;
 
-export const selectCount = (state: RootState) => state.todos;
+export const selectTodos = (state: RootState) => state.todos;
 
 export default todosSlice.reducer;

@@ -4,7 +4,7 @@ import Todos from "./features/todos/todos";
 function App() {
   return (
     <>
-      <Counter />
+      {/* <Counter /> */}
       <hr />
       <Todos />
     </>
