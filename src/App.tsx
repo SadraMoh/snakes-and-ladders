@@ -1,12 +1,14 @@
 import { Counter } from "./features/counter/Counter";
+import Game from "./features/forest/Game";
 import Todos from "./features/todos/todos";
 
 function App() {
   return (
     <>
-      {/* <Counter /> */}
+      {/* <Counter />
       <hr />
-      <Todos />
+      <Todos /> */}
+      <Game />
     </>
   );
 }

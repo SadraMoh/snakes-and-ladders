@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { selectTodos, Todo, addTodo, toggleTodo, removeTodo } from "./todosSlice";
 
 const Todos = () => {
+  
   const todos: Todo[] = useAppSelector(selectTodos);
   const dispatch = useAppDispatch();
 
