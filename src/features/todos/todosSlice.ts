@@ -19,6 +19,8 @@ export const todosSlice = createSlice({
     },
     removeTodo: (list, action: PayloadAction<Todo>) => {
       const toBeDeletedIndex = list.findIndex(i => i.id === action.payload.id);
+      if (toBeDeletedIndex < 0) { console.warn('item not found'); return };
+
       list.splice(toBeDeletedIndex, 1);
     },
     toggleTodo: (list, action: PayloadAction<Todo>) => {
