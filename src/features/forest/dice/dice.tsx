@@ -6,15 +6,15 @@ import { ReactComponent as Four } from "assets/dice/dice-six-faces-four.svg";
 import { ReactComponent as Five } from "assets/dice/dice-six-faces-five.svg";
 import { ReactComponent as Six } from "assets/dice/dice-six-faces-six.svg";
 
-
+const svgSize: React.CSSProperties = { width: 48, height: 48 };
 const dotmap = [
   <></>,
-  <One />,
-  <Two />,
-  <Three />,
-  <Four />,
-  <Five />,
-  <Six />,
+  <One style={svgSize} />,
+  <Two style={svgSize} />,
+  <Three style={svgSize} />,
+  <Four style={svgSize} />,
+  <Five style={svgSize} />,
+  <Six style={svgSize} />,
 ];
 
 type OneToSix = 1 | 2 | 3 | 4 | 5 | 6;
@@ -22,7 +22,7 @@ const Dice = () => {
   const [num, setNum] = useState<OneToSix>(1);
 
   function rollDice() {
-    const newDice = Math.round(Math.random() * 5) + 1 as OneToSix;
+    const newDice = (Math.round(Math.random() * 5) + 1) as OneToSix;
     setNum(newDice);
   }
 
