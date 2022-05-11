@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 
-export const PossibleColors = ['red', 'yellow', 'blue', 'green'] as const;
+export const PossibleColors = ['red', 'orange', 'blue', 'green'] as const;
 
 export type PlayerColor = typeof PossibleColors[number];
 
@@ -50,3 +50,4 @@ export default playersSlice.reducer;
 export const { addPlayer, movePlayer, removePlayer } = playersSlice.actions;
 
 export const selectPlayers = (state: RootState) => state.players;
+export const selectPlayersOnCell =(state: RootState, cellIndex: number) => state.players.filter(player => player.position === cellIndex)

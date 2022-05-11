@@ -22,7 +22,7 @@ const Dice = () => {
   const [num, setNum] = useState<OneToSix>(1);
 
   function rollDice() {
-    const newDice = (Math.round(Math.random() * 5) + 1) as OneToSix;
+    const newDice = (Math.floor(Math.random() * 6) + 1) as OneToSix;
     setNum(newDice);
   }
 

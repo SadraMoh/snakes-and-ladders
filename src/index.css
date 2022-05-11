@@ -28,3 +28,32 @@ code {
   height: 32px;
   width: 32px;
 }
+
+.block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 44px;
+  height: 44px;
+
+  flex-direction: column;
+}
+
+.block.snake .to {
+  color: red;
+}
+
+.block.ladder .to {
+  color: blue;
+}
+
+.block.highlighted {
+  background-color: rgba(255, 0, 242, 0.3);
+}
+
+table, th, td, .out {
+  border: 1px solid gray;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
