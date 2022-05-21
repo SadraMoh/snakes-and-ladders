@@ -1,4 +1,5 @@
 import { useAppSelector } from "app/hooks";
+import { useEffect, useReducer, useState } from "react";
 import { selectMap } from "../mapSlice";
 import Block from "./Block/Block";
 
@@ -13,7 +14,7 @@ const Map = () => {
             <tr key={i}>
               {row.map((cell, j) => (
                 <td key={j}>
-                  <Block index={cell.index} to={cell.to}/>
+                  <Block {...cell} />
                 </td>
               ))}
             </tr>

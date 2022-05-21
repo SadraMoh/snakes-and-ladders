@@ -21,7 +21,8 @@ const Block = (cell: Cell) => {
   const residentPlayers = useAppSelector((state) =>
     selectPlayersOnCell(state, index)
   );
-
+  const areTherePlayers = residentPlayers.length > 0;
+  
   const dispatch = useAppDispatch();
 
   // determine cell type
@@ -50,17 +51,17 @@ const Block = (cell: Cell) => {
     >
       <span className="number">{index}</span>
 
-      {to && (
+      { !areTherePlayers && to && (
         <span className="to">
           {cellType === "ladder" ? "↑" : "↓"}
           {to}
         </span>
       )}
 
-      {residentPlayers.length > 0 && (
+      { areTherePlayers && (
         <div className="players">
           {residentPlayers.map((player) => (
-            <div key={player.id} className="player"></div>
+            <div key={player.id} className="player" style={{ backgroundColor: player.color }}></div>
           ))}
         </div>
       )}

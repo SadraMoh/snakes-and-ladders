@@ -2,9 +2,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppThunk, RootState } from "../../app/store";
 import { Player, selectPlayers } from "./playersSlice";
 
+export type OneToSix = 1 | 2 | 3 | 4 | 5 | 6;
+
 export interface Game {
   turn: Player
-  dice: number
+  dice: OneToSix
 }
 
 const initialState: Game = {
@@ -14,14 +16,14 @@ const initialState: Game = {
     color: 'red',
     position: -1
   },
-  dice: 0
+  dice: 1
 }
 
 export const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
-    setDice: (game, { payload: dice }: PayloadAction<number>) => {
+    setDice: (game, { payload: dice }: PayloadAction<OneToSix>) => {
       game.dice = dice;
     },
     setTurn: (game, { payload: player }: PayloadAction<Player>) => {
@@ -34,11 +36,12 @@ export const gameSlice = createSlice({
 export const nextTurn =
   (): AppThunk =>
     (dispatch, getState) => {
+      
       const state = getState();
       const players = selectPlayers(state);
       const turn = selectTurn(state);
 
-      const currentTurnIndex = players.indexOf(turn);
+      const currentTurnIndex = players.findIndex(player => player.id === turn.id);
       const nextTurnIndex = (currentTurnIndex + 2 > players.length) ? 0 : currentTurnIndex + 1;
 
       dispatch(setTurn(players[nextTurnIndex]))

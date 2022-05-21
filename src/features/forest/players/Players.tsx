@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import React, { useState } from "react";
-import { selectTurn } from "../gameSlice";
+import { nextTurn, selectTurn, setTurn } from "../gameSlice";
 import {
   addPlayer,
   Player,
@@ -39,6 +39,7 @@ const Players = () => {
     };
 
     dispatch(addPlayer(player));
+    dispatch(setTurn(player));
   }
 
   return (

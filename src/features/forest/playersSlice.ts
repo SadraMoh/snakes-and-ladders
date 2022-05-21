@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../../app/store";
+import { AppThunk, RootState } from "../../app/store";
+import { selectCell } from "./mapSlice";
 
 export const PossibleColors = ['red', 'orange', 'blue', 'green'] as const;
 
@@ -13,12 +14,12 @@ export interface Player {
 }
 
 const initialState: Player[] = [
-  {
-    id: Math.random(),
-    name: 'sadra',
-    color: "red",
-    position: 0
-  }
+  // {
+  //   id: Math.random(),
+  //   name: 'sadra',
+  //   color: "red",
+  //   position: 0
+  // }
 ]
 
 export const playersSlice = createSlice({
@@ -45,9 +46,29 @@ export const playersSlice = createSlice({
   }
 })
 
+// animate player movement between blocks/cells, THUNK
+export const interpolatePlayer =
+  (player: Player, to: number): AppThunk =>
+    async (dispatch, getState) => {
+
+      for (let step = player.position + 1; step <= to; step++) {
+        dispatch(movePlayer({ player, to: step }))
+        if (step !== to)
+          await new Promise((res) => setTimeout(res, 250))
+      }
+
+      const cell = selectCell(getState(), to)
+      if (cell?.to) {
+        await new Promise((res) => setTimeout(res, 250))
+        dispatch(movePlayer({ player, to: cell.to }))
+      }
+
+
+    };
+
 export default playersSlice.reducer;
 
 export const { addPlayer, movePlayer, removePlayer } = playersSlice.actions;
 
 export const selectPlayers = (state: RootState) => state.players;
-export const selectPlayersOnCell =(state: RootState, cellIndex: number) => state.players.filter(player => player.position === cellIndex)
+export const selectPlayersOnCell = (state: RootState, cellIndex: number) => state.players.filter(player => player.position === cellIndex)
